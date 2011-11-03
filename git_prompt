@@ -78,7 +78,7 @@ git_prompt() {
     local behind_part=$(behind_arrow)
     local ahead_part=$(ahead_arrow)
 
-    if [[ ! "$behind_part" ]] && [[ ! "$ahead_part" ]]
+    if [[ ! "$behind_part" && ! "$ahead_part" ]]
     then
         prompt="$(branch_part)"
     else
