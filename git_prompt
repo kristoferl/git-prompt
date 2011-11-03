@@ -1,0 +1,89 @@
+#!/bin/bash
+
+git_prompt() {
+    git_status_output=$(git status 2> /dev/null) || return
+
+    branch_name() {
+        sed -n 's/# On branch //p' <<< "$git_status_output"
+    }
+
+    number_of_commits() {
+        local branch_prefix='# Your branch is '
+        local branch_suffix='by [[:digit:]]+'
+        if [[ "$git_status_output" =~ ${branch_prefix}"$1".*${branch_suffix} ]]
+        then
+            echo ${BASH_REMATCH[0]//[^0-9]/}
+        else
+            echo 0 && return 1
+        fi
+    }
+
+    match_against_status() {
+        local pattern="$1"
+        [[ "$git_status_output" =~ ${pattern} ]]
+    }
+
+    working_dir_clean() {
+        match_against_status '(working directory clean)'
+    }
+
+    uncommitted_changes() {
+        match_against_status '(# Changes not staged for commit|# Changes to be committed)'
+    }
+
+    untracked_files() {
+        match_against_status '# Untracked files'
+    }
+
+    dashline() {
+        eval printf '%.0s-' {1..$1}
+    }
+
+    ahead_arrow() {
+        if commits_ahead=$(number_of_commits "ahead")
+        then
+            echo "$(dashline $commits_ahead)>"
+        fi
+    }
+
+    behind_arrow() {
+        if commits_behind=$(number_of_commits "behind")
+        then
+            echo "<$(dashline $commits_behind)"
+        fi
+    }
+
+    branch_part() {
+        local red="\033[31m"
+        local green="\033[32m"
+        local yellow="\033[33m"
+        local branch_colour=""
+
+        if untracked_files
+        then
+            branch_colour=$red
+        elif uncommitted_changes
+        then
+            branch_colour=$yellow
+        elif working_dir_clean
+        then
+            branch_colour=$green
+        fi
+        local no_colour="\033[0m"
+        echo "($branch_colour$(branch_name)$no_colour)"
+    }
+
+    local behind_part=$(behind_arrow)
+    local ahead_part=$(ahead_arrow)
+
+    if [[ ! "$behind_part" ]] && [[ ! "$ahead_part" ]]
+    then
+        prompt="$(branch_part)"
+    else
+        prompt="[ $behind_part$(branch_part)$ahead_part ]"
+    fi
+
+    echo -e "$prompt"
+}
+
+export PS1="\$(git_prompt && echo -e '\n')"$PS1
