@@ -25,5 +25,5 @@ In sync with remote:
 
 Colour of branch name:
   green: working directory clean
-  yellow: uncomitted changes
+  yellow: local changes
   red: untracked files
