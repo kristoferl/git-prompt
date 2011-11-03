@@ -28,7 +28,9 @@ git_prompt() {
     }
 
     local_changes() {
-        match_against_status '(# Changes not staged for commit|# Changes to be committed)'
+        local added='# Changes to be committed'
+        local not_added='# Changes not staged for commit'
+        match_against_status "($added|$not_added)"
     }
 
     untracked_files() {
