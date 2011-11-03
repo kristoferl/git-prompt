@@ -27,7 +27,7 @@ git_prompt() {
         match_against_status '(working directory clean)'
     }
 
-    uncommitted_changes() {
+    local_changes() {
         match_against_status '(# Changes not staged for commit|# Changes to be committed)'
     }
 
@@ -62,7 +62,7 @@ git_prompt() {
         if untracked_files
         then
             branch_colour=$red
-        elif uncommitted_changes
+        elif local_changes
         then
             branch_colour=$yellow
         elif working_dir_clean
