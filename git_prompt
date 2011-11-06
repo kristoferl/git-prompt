@@ -41,17 +41,20 @@ git_prompt() {
         eval printf '%.0s-' {1..$1}
     }
 
+    local bold="\033[1m"
+    local no_colour="\033[0m"
+
     ahead_arrow() {
         if commits_ahead=$(number_of_commits "ahead")
         then
-            echo "$(dashline $commits_ahead)>"
+            echo -e "$bold$(dashline $commits_ahead)$no_colour>"
         fi
     }
 
     behind_arrow() {
         if commits_behind=$(number_of_commits "behind")
         then
-            echo "<$(dashline $commits_behind)"
+            echo "<$bold$(dashline $commits_behind)$no_colour"
         fi
     }
 
@@ -71,7 +74,6 @@ git_prompt() {
         then
             branch_colour=$green
         fi
-        local no_colour="\033[0m"
         echo "($branch_colour$(branch_name)$no_colour)"
     }
 
