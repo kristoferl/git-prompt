@@ -86,7 +86,7 @@ git_prompt() {
         prompt="[ $behind_part|$ahead_part ]\n$(branch_part)"
     fi
 
-    echo -e "$prompt"
+    echo -e "$prompt "
 }
 
-export PS1="\$(git_prompt && echo -e '\n')"$PS1
+export PS1="\$(git_prompt)"$PS1
