@@ -53,7 +53,7 @@ git_prompt() {
     behind_arrow() {
         if commits_behind=$(number_of_commits "behind")
         then
-            echo "$commit_behind behind <$bold$(dashline $commits_behind)$no_colour"
+            echo "$commits_behind behind <$bold$(dashline $commits_behind)$no_colour"
         fi
     }
 
