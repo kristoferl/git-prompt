@@ -83,7 +83,7 @@ git_prompt() {
     then
         prompt="$(branch_part)"
     else
-        prompt="[ $behind_part|$ahead_part ]\n$(branch_part)"
+        prompt="$behind_part|$ahead_part\n$(branch_part)"
     fi
 
     echo -e "$prompt "

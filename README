@@ -4,19 +4,19 @@ Mimics the github display of ahead/behind.
 
 Two commits behind, seven commits ahead:
 
-[ 2 behind <--|-------> 7 ahead ]
+2 behind <--|-------> 7 ahead
 master imac:bash-prompt-git-status jseb$ 
 
 
 Six commits ahead:
 
-[ |------> 6 ahead ]
+|------> 6 ahead
 master imac:bash-prompt-git-status jseb$ 
 
 
 Eight commits behind:
 
-[ 8 behind <--------| ]
+8 behind <--------|
 master imac:bash-prompt-git-status jseb$ 
 
 In sync with remote:
