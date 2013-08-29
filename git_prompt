@@ -11,7 +11,7 @@ git_prompt() {
         local branch_suffix='by [[:digit:]]+'
         if [[ "$git_status_output" =~ ${branch_prefix}"$1".*${branch_suffix} ]]
         then
-            echo ${BASH_REMATCH[0]//[^0-9]/}
+            echo ${BASH_REMATCH[0]}| grep -o '[0-9]*$'
         else
             echo 0 && return 1
         fi
