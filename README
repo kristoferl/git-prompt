@@ -19,6 +19,12 @@ Eight commits behind:
 8 behind <--------|
 master imac:bash-prompt-git-status jseb$ 
 
+
+Stash(es):
+
+master [**] imag:bash-prompt-git-status jseb$
+
+
 In sync with remote:
 
 master imac:bash-prompt-git-status jseb$

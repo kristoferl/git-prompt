@@ -76,6 +76,15 @@ git_prompt() {
         echo "$branch_colour$(branch_name)$no_colour"
     }
 
+    stash_part() {
+        size=$(git stash list|wc -l)
+        if [[ $size -gt 0 ]]
+        then
+            printf -v sep '%*s' $size
+            echo "[${sep// /*}] "
+        fi
+    }
+
     local behind_part=$(behind_arrow)
     local ahead_part=$(ahead_arrow)
 
@@ -86,7 +95,7 @@ git_prompt() {
         prompt="$behind_part|$ahead_part\n$(branch_part)"
     fi
 
-    echo -e "$prompt "
+    echo -e "$prompt $(stash_part)"
 }
 
 export PS1="\$(git_prompt)"$PS1
