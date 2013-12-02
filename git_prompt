@@ -3,7 +3,7 @@ git_prompt() {
     git_status_output=$(git status 2> /dev/null) || return
 
     branch_name() {
-        sed -n 's/# On branch //p' <<< "$git_status_output"
+        sed -n 's/^.*On branch //p' <<< "$git_status_output"
     }
 
     number_of_commits() {
@@ -27,13 +27,13 @@ git_prompt() {
     }
 
     local_changes() {
-        local added='# Changes to be committed'
-        local not_added='# Changes not staged for commit'
+        local added='^.*Changes to be committed'
+        local not_added='^.*Changes not staged for commit'
         match_against_status "($added|$not_added)"
     }
 
     untracked_files() {
-        match_against_status '# Untracked files'
+        match_against_status '^.*Untracked files'
     }
 
     dashline() {
