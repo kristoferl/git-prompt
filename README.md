@@ -1,35 +1,33 @@
-Adds some reminders about the git status of current working directory, to the bash prompt.
-Mimics the github display of ahead/behind.
+# git-prompt
+Adds some basic git status to the bash prompt, mimics the github display of
+ahead/behind.
 
+## Screenshots
+Ahead and behind, yellow indicates uncomitted changes.
 
-Two commits behind, seven commits ahead:
+![Alt text](https://raw.github.com/jseb/git-prompt/screenshots/screenshots/1.png)
 
-2 behind <--|-------> 7 ahead
-master imac:bash-prompt-git-status jseb$ 
+Ahead, red color = untracked files.
 
+![Alt text](https://raw.github.com/jseb/git-prompt/screenshots/screenshots/2.png)
 
-Six commits ahead:
+Up to date, with one stash. Green color means working directory clean.
 
-|------> 6 ahead
-master imac:bash-prompt-git-status jseb$ 
+![Alt text](https://raw.github.com/jseb/git-prompt/screenshots/screenshots/3.png)
 
+## Try it out
+By simply pasting this in your terminal:
 
-Eight commits behind:
+```
+source <(curl https://raw.github.com/jseb/git-prompt/master/git-prompt) \
+	&& export PS1="\$(git_prompt)"$PS1
+```
 
-8 behind <--------|
-master imac:bash-prompt-git-status jseb$ 
+## Installation
+Clone the repo (or just download the file), and add this to the end of your
+.bash_profile:
 
-
-Stash(es):
-
-master [**] imag:bash-prompt-git-status jseb$
-
-
-In sync with remote:
-
-master imac:bash-prompt-git-status jseb$
-
-Colour of branch name:
-  green: working directory clean
-  yellow: local changes
-  red: untracked files
+```
+source path/to/git-prompt/git-prompt
+export PS1="\$(git_prompt)"$PS1
+```
