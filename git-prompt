@@ -96,5 +96,3 @@ git_prompt() {
 
     echo -e "$prompt $(stash_part)"
 }
-
-export PS1="\$(git_prompt)"$PS1
