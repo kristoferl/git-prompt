@@ -80,7 +80,7 @@ git_prompt() {
         if [[ $size -gt 0 ]]
         then
             printf -v sep '%*s' $size
-            echo "[${sep// /*}] "
+            echo "[${sep// /≈}] "
         fi
     }
 
