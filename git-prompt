@@ -71,7 +71,7 @@ git_prompt() {
 
     stash_part() {
         size=$(git stash list|wc -l)
-        [ $size -gt 0 ] && repeat_char "≈" $size
+        [ $size -gt 0 ] && echo "[$(repeat_char "≈" $size)]"
     }
 
     local behind_part=$(behind_arrow)
